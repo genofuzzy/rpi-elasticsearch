@@ -51,4 +51,5 @@ RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["elasticsearch"]
+USER elasticsearch
+CMD ["elasticsearch", "-Ecluster.name=es-cluster", "-Enode.name=${HOSTNAME}", "-Enetwork.host=0.0.0.0", "-Ediscovery.zen.ping.unicast.host=es-master"]
